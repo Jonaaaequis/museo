@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')  # Asegúrate de configurarla en Render
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['jona.onrender.com', 'localhost'] 
+ALLOWED_HOSTS = ['jona-i7su.onrender.com/', 'localhost'] 
 
 
 # Application definition
