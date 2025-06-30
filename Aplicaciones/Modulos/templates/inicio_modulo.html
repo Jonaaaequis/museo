@@ -1,0 +1,67 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido %}
+<section class="section">
+  <div class="container">
+    <a href="{% url 'nuevo_modulo' %}" class="btn btn-success mb-3">Nuevo Modulo</a>
+    <h2 class="text-center mb-4">Lista de MOdulos</h2>
+
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Museo</th>
+            <th>Diseñador UX</th>
+            <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for modulo in modulos %}
+            <tr>
+                <td>{{ modulo.titulo }}</td>
+                <td>{{ modulo.descripcion }}</td>
+                <td>{{ modulo.museo.nombre }}</td>
+                <td>{{ modulo.disenador.nombre }}</td>
+                <td>
+                    <a href="{% url 'editar_modulo' modulo.id %}" class="btn btn-outline-warning btn-sm">
+                        <i class="fa fa-pen"></i> Editar
+                    </a>
+                        
+                    <a href="#" 
+                        class="btn btn-outline-danger btn-sm" 
+                        onclick="confirmarEliminacion('{{ modulo.id }}')">
+                        <i class="fa fa-trash"></i>Eliminar
+                    </a>
+                    <script>
+                        function confirmarEliminacion(id) {
+                            Swal.fire({
+                                title: "¿Estás seguro?",
+                                text: "¡No podrás revertir esto!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Sí, eliminarlo",
+                                cancelButtonText: "Cancelar"
+                                }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/modulos/eliminar/" + id;
+                                }
+                            });
+                        }
+                    </script>
+
+                </td>
+
+            </tr>
+     </tbody>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center">No hay modulos registrados aún.</p>
+      </div>
+      {% endfor %}
+    </table>
+  </div>
+</section>
+{% endblock %}

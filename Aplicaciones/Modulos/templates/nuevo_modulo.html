@@ -1,0 +1,39 @@
+{% extends 'plantilla.html' %}
+{% block contenido %}
+
+<div class="container mt-5">
+  <h2>Registrar Módulo Interactivo</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" class="form-control" name="titulo" required>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" name="descripcion" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="museo" class="form-label">Museo</label>
+      <select class="form-select" name="museo" required>
+        <option value="" disabled selected>Seleccione un museo</option>
+        {% for museo in museos %}
+        <option value="{{ museo.id }}">{{ museo.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="disenador" class="form-label">Diseñador UX</label>
+      <select class="form-select" name="disenador" required>
+        <option value="" disabled selected>Seleccione un diseñador</option>
+        {% for disenador in disenadores %}
+        <option value="{{ disenador.id }}">{{ disenador.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'inicio_modulos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+{% endblock %}

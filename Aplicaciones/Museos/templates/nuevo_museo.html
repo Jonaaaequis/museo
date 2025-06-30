@@ -1,0 +1,25 @@
+{% extends 'plantilla.html' %}
+{% block contenido %}
+
+<div class="container py-4">
+  <h2 class="text-center">Registrar Nuevo Museo</h2>
+  <form method="POST" class="mt-4">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" name="nombre" id="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="direccion" class="form-label">Dirección</label>
+      <input type="text" name="direccion" id="direccion" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="ciudad" class="form-label">Ciudad</label>
+      <input type="text" name="ciudad" id="ciudad" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'inicio_museos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+{% endblock %}

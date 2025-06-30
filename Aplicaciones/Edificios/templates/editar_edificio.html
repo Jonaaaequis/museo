@@ -1,0 +1,42 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido %}
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Registrar Nuevo Diseñador UX</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Edificio:</label>
+        <input type="text" class="form-control" name="edificio" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Escala:</label>
+        <input type="email" class="form-control" name="escala" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Materiales:</label>
+        <input type="email" class="form-control" name="materiales" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Construccion:</label>
+        <input type="number" class="form-control" name="construccion" min="0" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Proposito:</label>
+        <input type="email" class="form-control" name="proposito" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Ubicacion</label>
+        <input type="email" class="form-control" name="ubicacion" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nivel</label>
+        <input type="email" class="form-control" name="nivel" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <a href="{% url 'inicio_edificios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

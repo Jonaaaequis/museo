@@ -1,0 +1,26 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido %}
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Editar Diseñador UX</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input type="text" class="form-control" name="nombre" value="{{ disenador.nombre }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Correo:</label>
+        <input type="email" class="form-control" name="correo" value="{{ disenador.correo }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Años de experiencia:</label>
+        <input type="number" class="form-control" name="experiencia" min="0" value="{{ disenador.experiencia }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+      <a href="{% url 'inicio_disenadores' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

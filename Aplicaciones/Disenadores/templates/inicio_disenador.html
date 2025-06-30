@@ -1,0 +1,65 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido %}
+<section class="section">
+  <div class="container">
+    <a href="{% url 'nuevo_disenador' %}" class="btn btn-success mb-3">Nuevo Diseñador</a>
+    <h2 class="text-center mb-4">Lista de Diseñadores UX</h2>
+
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Años de experiencia</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for disenador in disenadores %}
+            <tr>
+                <td>{{ disenador.nombre }}</td>
+                <td>{{ disenador.correo }}</td>
+                <td>{{ disenador.experiencia }}</td>
+                <td>
+                    <a href="{% url 'editar_disenador' disenador.id %}" class="btn btn-outline-warning btn-sm">
+                        <i class="fa fa-pen"></i> Editar
+                    </a>
+                        
+                    <a href="#" 
+                        class="btn btn-outline-danger btn-sm" 
+                        onclick="confirmarEliminacion('{{ disenador.id }}')">
+                        <i class="fa fa-trash"></i>Eliminar
+                    </a>
+                    <script>
+                        function confirmarEliminacion(id) {
+                            Swal.fire({
+                                title: "¿Estás seguro?",
+                                text: "¡No podrás revertir esto!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Sí, eliminarlo",
+                                cancelButtonText: "Cancelar"
+                                }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "eliminar_disenador/" + id;
+                                }
+                            });
+                        }
+                    </script>
+
+                </td>
+
+            </tr>
+     </tbody>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center">No hay diseñadores registrados aún.</p>
+      </div>
+      {% endfor %}
+    </table>
+  </div>
+</section>
+{% endblock %}

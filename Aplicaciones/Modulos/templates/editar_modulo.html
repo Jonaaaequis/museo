@@ -1,0 +1,37 @@
+{% extends 'plantilla.html' %}
+{% block contenido %}
+
+<div class="container mt-5">
+  <h2>Editar Módulo Interactivo</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" class="form-control" name="titulo" value="{{ modulo.titulo }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" name="descripcion" required>{{ modulo.descripcion }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label for="museo" class="form-label">Museo</label>
+      <select class="form-select" name="museo" required>
+        {% for museo in museos %}
+        <option value="{{ museo.id }}" {% if museo.id == modulo.museo.id %}selected{% endif %}>{{ museo.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="disenador" class="form-label">Diseñador UX</label>
+      <select class="form-select" name="disenador" required>
+        {% for disenador in disenadores %}
+        <option value="{{ disenador.id }}" {% if disenador.id == modulo.disenador.id %}selected{% endif %}>{{ disenador.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    <a href="{% url 'inicio_modulos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>+
+
+{% endblock %}
